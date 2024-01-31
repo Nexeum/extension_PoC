@@ -1,0 +1,20 @@
+{
+    "name": "nu2910001_checklistperformance_hb_extension",
+    "version": "1.0.2",
+    "description": "Extensión que permite evaluar la necesidad de pruebas de Performance",
+    "main": "index.js",
+    "scripts": {
+        "build": "tsc",
+        "test": "jest --clearCache && jest --coverage",
+        "start:dev": "tsc --build --clean && tsc -w"
+    },
+    "author": "Bancolombia",
+    "license": "ISC",
+    "dependencies": {
+        "i": "^0.3.7",
+        "npm": "^10.4.0"
+    },
+    "devDependencies": {
+        "typescript": "^5.3.3"
+    }
+}

@@ -1,0 +1,49 @@
+{
+  "manifestVersion": 1,
+  "id": "nu2910001-checklistperformance-hb-extension",
+  "version": "1.0.9",
+  "name": "Checklist Performance",
+  "description": "Extensión que permite evaluar la necesidad de pruebas de Performance",
+  "publisher": "nu2910001-checklistperformance-hb-extension",
+  "targets": [
+    {
+      "id": "Microsoft.VisualStudio.Services"
+    }
+  ],
+  "demands": [],
+  "categories": [
+    "Azure Pipelines"
+  ],
+  "icons": {
+    "default": "images/extension-icon.png"
+  },
+  "tags": [
+    ""
+  ],
+  "scopes": [
+    "vso.release_manage",
+    "vso.extension.data"
+  ],
+  "files": [
+    {
+      "path": "images",
+      "addressable": true
+    },
+    {
+      "path": "tasks/checklistPerformance/dist"
+    }
+  ],
+  "contributions": [
+    {
+      "id": "my-non-task-contribution",
+      "type": "ms.vss-web.hub",
+      "targets": [
+        "ms.vss-web.project-hub"
+      ],
+      "properties": {
+        "name": "My Non-Task Contribution",
+        "order": 50
+      }
+    }
+  ]
+}

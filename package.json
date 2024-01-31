@@ -1,0 +1,27 @@
+{
+  "name": "nu2910001_checklistperformance_hb_extension",
+  "version": "1.0.0",
+  "description": "Extensión que permite evaluar la necesidad de pruebas de Performance",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "install": "node scripts/install.js",
+    "build": "node scripts/build.js",
+    "package": "node scripts/package.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://grupobancolombia.visualstudio.com/Vicepresidencia%20Servicios%20de%20Tecnolog%C3%ADa/_git/NU2910001_CheckListPerformance_HB_extension"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "azde-scripts": "^2.0.2",
+    "azure-devops-extension-sdk": "^4.0.2",
+    "azure-pipelines-task-lib": "^4.8.2",
+    "rimraf": "^5.0.5",
+    "tfx-cli": "^0.16.0",
+    "vss-web-extension-sdk": "^5.141.0"
+  }
+}
