@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Preguntas Check List Performance</title>
+    <link rel="stylesheet" href="main.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+    <!-- Capa de Presentación (UI) -->
+    <div class="sample-container">
+        <div id="vss-extension">
+            <button class="evluarButton" hidden='hidden' disabled='disabled'>Evaluar Checklist</button>
+        </div>
+    </div>
+ 
+    <!-- Modales para evaluación online, batch, interactivo y mensaje de advertencia -->
+    <div id="myModal_online" class="modal">
+        <!-- Modal content para evaluación online -->
+        <div class="modal-content">
+            <span class="close_online">&times;</span>
+            <div class="hub-progress pageProgressIndicator"></div>
+            <div id="rnf-online">
+                <div class="note-content">
+                    <div class="notes-toolbar-container1_online">
+                        <p><strong>Al evaluar el Check List se eliminarán los Requisitos No Funcionales que no corresponden al tipo de transacción seleccionada.</strong></p>    
+                        <p>Podrá seguir ingresando transacciones en la sección de RNF Online.</p>  
+                        <p>Recuerde dar clic en <strong>Ver Transacciones Ingresadas.</strong></p>  
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>  
+ 
+    <div id="myModal_batch" class="modal">
+        <!-- Modal content para evaluación batch -->
+        <div class="modal-content">
+            <span class="close_batch">&times;</span>
+            <div class="hub-progress pageProgressIndicator"></div>
+            <div id="rnf-batch">
+                <div class="note-content">
+                    <div class="notes-toolbar-container1_batch">
+                        <p><strong>Al evaluar el Check List se eliminarán los Requisitos No Funcionales que no corresponden al tipo de transacción seleccionada.</strong></p>
+                        <p>Podrá seguir ingresando transacciones en la sección de RNF Batch.</p>  
+                        <p>Recuerde dar clic en <strong>Ver Procesos Ingresados.</strong></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+ 
+    <div id="myModal_interactivo" class="modal">
+        <!-- Modal content para evaluación interactivo -->
+        <div class="modal-content">
+            <span class="close_interactivo">&times;</span>
+            <div class="hub-progress pageProgressIndicator"></div>
+            <div id="rnf-interactivo">
+                <p><strong>Importante: </strong>La transacción Interactiva se compone de una parte Online y una parte Batch, deberá indicar ambos requisitos no funcionales.</p>  
+                <p><strong>Al evaluar el Check List se eliminarán los Requisitos No Funcionales que no corresponden al tipo de transacción seleccionada.</strong></p>      
+                <p>Podrá seguir ingresando transacciones en cada sección de RNF Batch y Online.</p>  
+                <p>Recuerde dar clic en <strong>Ver Procesos Ingresados.</strong></p>
+                <div class="note-content">
+                    <div class="notes-toolbar-container1_online"></div>
+                    <div class="notes-toolbar-container1_batch"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+ 
+    <div id="myModal_stop" class="modal">
+        <!-- Modal content para mensaje de advertencia -->
+        <div class="modal-content-stop">
+            <p><strong class="strong">Importante:</strong></p>
+            <p id="msn" class="close_stop_msn"></p>
+            <button class="close_stop">Aceptar</button>
+        </div>
+    </div>
+ 
+    <!-- Capa de Presentación (Referencia al archivo TS externo) -->
+    <script src="vista_infoTecnica.ui.ts" defer></script>
+</body>
+</html>

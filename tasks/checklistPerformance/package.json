@@ -12,9 +12,11 @@
     "license": "ISC",
     "dependencies": {
         "i": "^0.3.7",
-        "npm": "^10.4.0"
+        "npm": "^10.4.0",
+        "vss-web-extension-sdk": "^5.141.0"
     },
     "devDependencies": {
+        "@types/node": "^20.11.16",
         "typescript": "^5.3.3"
     }
 }

@@ -1,0 +1,1 @@
+{"version":3,"file":"respuesta_model.js","sourceRoot":"","sources":["../../../../src/domain/models/respuesta/respuesta_model.ts"],"names":[],"mappings":";;;AAEA,MAAa,SAAS;IAOlB,YAAY,EAAU,EAAE,SAAiB,EAAE,sBAAkC,EAAE;QAC3E,IAAI,CAAC,EAAE,GAAG,EAAE,CAAC;QACb,IAAI,CAAC,SAAS,GAAG,SAAS,CAAC;QAC3B,IAAI,CAAC,mBAAmB,GAAG,mBAAmB,CAAC;IACnD,CAAC;CACJ;AAZD,8BAYC"}
