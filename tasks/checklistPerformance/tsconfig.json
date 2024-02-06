@@ -1,15 +1,17 @@
 {
     "compilerOptions": {
-      "target": "ES6", 
-      "lib": ["ES2021.String"],
-      "module": "commonjs",
+      "target": "es5", 
+      "lib": ["es5", "dom"],
+      "module": "AMD",
+      "moduleResolution": "node",
       "removeComments": true,
       "strict": true,
       "outDir": "dist/",
       "rootDir": "src/",
-      "types": ["node"],
+      "types": ["vss-web-extension-sdk"],
       "esModuleInterop": true,
-      "sourceMap": true
+      "sourceMap": true,
+      "noImplicitAny": false
     },
     "include": ["src/**/*"],
     "exclude": ["node_modules", "**/*.spec.ts"]

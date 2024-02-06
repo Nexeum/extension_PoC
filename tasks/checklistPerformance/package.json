@@ -16,7 +16,6 @@
         "vss-web-extension-sdk": "^5.141.0"
     },
     "devDependencies": {
-        "@types/node": "^20.11.16",
         "typescript": "^5.3.3"
     }
 }
