@@ -1,6 +1,6 @@
 {
-  "port": 8327,
-  "path": "./",
+  "port": 44300,
+  "path": "D:/TESTWARE/NU2910001_CheckListPerformance_HB_extension",
   "clr": "v4.0",
-  "protocol": "http"
+  "protocol": "https"
 }

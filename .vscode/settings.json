@@ -1,3 +1,4 @@
 {
+    "iisexpress.openInBrowser": "chrome",
     "iis.configDir": ""
 }
