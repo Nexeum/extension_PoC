@@ -1,7 +1,12 @@
-function helloWorld(){
+import PreguntasSecuencialesUseCase from "./domain/usecase/PreguntasSecuencialesUseCase";
 
-    console.log("hello World");
+function run() {
+    try{
+        const preguntasSecuenciales = new PreguntasSecuencialesUseCase();
+        preguntasSecuenciales.iniciarSecuencia();
+    } catch (error) {
+        console.error(error);
+    }
 }
-helloWorld();
 
-
+run();
