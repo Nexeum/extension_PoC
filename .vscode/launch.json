@@ -1,19 +1,18 @@
 {
-    // Use IntelliSense to learn about possible attributes.
-    // Hover to view descriptions of existing attributes.
-    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
-        
- 
         {
-            "name": "Attach to url with files served from ./out",
+            "name": "Depurar infoTecnica.html",
             "type": "chrome",
             "request": "attach",
             "port": 9222,
             "url": "https://localhost:44300/tasks/checklistPerformance/src/helpers/vista_tecnica/html/infoTecnica.html",
             "webRoot": "${workspaceFolder}/out",
-           
+            "env": {
+                "NODE_ENV": "development"
+            },
+            "args": ["--disable-extensions"],
+            "chromeWebRoot": "${workspaceFolder}"
         }
-    ],
+    ]
 }
