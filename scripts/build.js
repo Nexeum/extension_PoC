@@ -1,48 +1,47 @@
- const exec = require('child_process').execSync;
+const { exec } = require('child_process');
 const rimraf = require('rimraf');
 const fs = require('fs');
 const path = require('path');
 
-/**
- * Build tasks.
- */
-function buildTasks() {
-    fs.readdir('tasks', (err, files) => {
-        files.forEach(taskName => {
-            let taskDir = path.join('tasks', taskName);
-            // If a package.json is missing, npm will exec the install command on the parent folder. This will cause an endless install loop.
-            if (fs.existsSync(path.join(taskDir, "package.json"))) {
-                execNpm('build', taskDir);
-            } else {
-                fs.readdir(taskDir, (err, taskVersionDirs) => {
-                    taskVersionDirs.forEach(versToBuild => {
-                        let taskVersionDir = path.join(taskDir, versToBuild);
-                        if (fs.existsSync(path.join(taskVersionDir, "package.json"))) {
-                            execNpm('build', taskVersionDir);
-                        }
-                    })
-                });
+async function buildTasks() {
+    const tasksDir = 'tasks';
+
+    try {
+        const tasks = await fs.promises.readdir(tasksDir);
+
+        await Promise.all(tasks.map(async (taskName) => {
+            const taskDir = path.join(tasksDir, taskName);
+            const packageJsonPath = path.join(taskDir, 'package.json');
+
+            try {
+                await fs.promises.access(packageJsonPath);
+                await execNpm('build', taskDir);
+            } catch (error) {
+                // Handle errors for nested tasks (if needed)
+                console.error(`Error building task ${taskName}`, error);
             }
-        });
-    });
+        }));
+    } catch (error) {
+        console.error('Error reading the tasks directory:', error);
+    }
 }
 
-/**
- * Clean dist files.
- * @param cwd - (String) - Current working directory.
- */
 function clean(cwd) {
     rimraf.sync(path.join(cwd, 'dist'));
 }
 
-/**
- * Build directory and execute npm command.
- * @param command - (String) - The command to execute, i.e. install, pack, etc.
- * @param cwd - (String) - Current working directory.
- */
-function execNpm(command, cwd) {
+async function execNpm(command, cwd) {
     clean(cwd);
-    exec('npm run ' + command, { cwd: cwd, stdio: [0, 1, 2] });
+    return new Promise((resolve, reject) => {
+        exec(`npm run ${command}`, { cwd }, (error, stdout, stderr) => {
+            if (error) {
+                reject(error);
+            } else {
+                console.log(stdout);
+                resolve();
+            }
+        });
+    });
 }
 
 buildTasks();

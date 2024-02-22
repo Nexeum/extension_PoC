@@ -1,50 +1,76 @@
-const exec = require('child_process').execSync;
+const exec = require('child_process').exec; // More flexible than execSync
 const rimraf = require('rimraf');
 const fs = require('fs');
 const path = require('path');
 
 /**
- * Install tasks.
+ * Install task dependencies with enhancements.
+ * @param {string} taskDir - The path to the task directory.
  */
-function installTasks() {
-    fs.readdir('tasks', (err, files) => {
-        files.forEach(taskName => {
-            let taskDir = path.join('tasks', taskName);
-            // If a package.json is missing, npm will exec the install command on the parent folder. This will cause an endless install loop.
-            if (fs.existsSync(path.join(taskDir, "package.json"))) {
-                cleanExecNpm('i', taskDir);
+function installTask(taskDir) {
+    if (!fs.existsSync(path.join(taskDir, "package.json"))) {
+        console.warn(`Skipping task ${taskDir}: No 'package.json' found`);
+        return;
+    }
+
+    clean(taskDir);
+
+    try {
+        exec('npm install -q', { cwd: taskDir }, (error, stdout, stderr) => {
+            if (error) {
+                console.error(`Error installing dependencies for ${taskDir}:`, error);
             } else {
-                fs.readdir(taskDir, (err, taskVersionDirs) => {
-                    taskVersionDirs.forEach(versToBuild => {
-                        let taskVersionDir = path.join(taskDir, versToBuild);
-                        if (fs.existsSync(path.join(taskVersionDir, "package.json"))) {
-                            cleanExecNpm('i', taskVersionDir);
-                        }
-                    })
-                });
+                console.log(`Dependencies installed for ${taskDir}`);
             }
         });
-    });
+    } catch (err) {
+        console.error(`Error installing dependencies for ${taskDir}:`, err);
+    }
 }
 
 /**
- * Clean npm install/pack files.
- * @param cwd - (String) - Current working directory.
+ * Clean npm install/pack files (with safer path handling).
+ * @param {string} cwd - (String) - Current working directory.
  */
 function clean(cwd) {
     rimraf.sync(path.join(cwd, 'node_modules'));
     rimraf.sync(path.join(cwd, 'package-lock.json'));
-    rimraf.sync(path.join(cwd, '*.tgz'));
+
+    // More targeted deletion of .tgz files
+    fs.readdirSync(cwd).forEach(file => {
+        if (file.endsWith('.tgz')) {
+            rimraf.sync(path.join(cwd, file));
+        }
+    });
 }
 
 /**
- * Clean directory and execute npm command.
- * @param command - (String) - The command to execute, i.e. install, pack, etc.
- * @param cwd - (String) - Current working directory.
+ * Install tasks - handles nested tasks, tracks dependencies.
  */
-function cleanExecNpm(command, cwd) {
-    clean(cwd);
-    exec('npm ' + command + ' -q', { cwd: cwd, stdio: [0, 1, 2] });
+function installTasks() {
+    const installedTasks = new Set(); // Track installed tasks
+
+    fs.readdir('tasks', (err, taskDirs) => {
+        taskDirs.forEach(taskName => {
+            const taskDir = path.join('tasks', taskName);
+
+            if (!installedTasks.has(taskDir)) {
+                installTask(taskDir);
+                installedTasks.add(taskDir);
+            }
+
+            // Look for nested tasks
+            fs.readdir(taskDir, (err, subDirs) => {
+                subDirs.forEach(subDir => {
+                    const nestedTaskDir = path.join(taskDir, subDir);
+                    if (!installedTasks.has(nestedTaskDir)) {
+                        installTask(nestedTaskDir);
+                        installedTasks.add(nestedTaskDir);
+                    }
+                });
+            });
+        });
+    });
 }
 
 installTasks();
